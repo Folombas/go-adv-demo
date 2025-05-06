@@ -2,6 +2,13 @@ package main
 
 import "fmt"
 
+type User struct {
+	Name string
+}
+// go run -gcflags '-m -l' main.go
 func main() {
-	fmt.Println("Hello!")
+	user := &User {
+		Name: "Vasya",
+	}
+	fmt.Println(user)
 }
