@@ -1,19 +1,9 @@
 package main
 
-type User struct {
-	Name string
-}
-// go run -gcflags '-m -l' main.go
-func main() {
-	age := getAge()
-	canDrink(age)
+type Reader interface {
+	Read(p []byte) (n int, err error)
 }
 
-func canDrink(age *int) bool {
-	return *age >= 18
-}
-
-func getAge() *int {
-	age := 18
-	return &age
+type Reader2 interface {
+	Read(p []byte) (n int, err error)
 }
