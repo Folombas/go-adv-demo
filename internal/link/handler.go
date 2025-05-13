@@ -1,6 +1,7 @@
 package link
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -14,8 +15,8 @@ func NewLinkHandler(router *http.ServeMux, deps LinkHandlerDeps) {
 	handler := &LinkHandler{}
 	router.HandleFunc("POST /link", handler.Create())
 	router.HandleFunc("PATCH /link/{id}", handler.Update())
-	router.HandleFunc("DELETE /link/{id}", handler.Delete())
-	router.HandleFunc("GET /link/{alias}", handler.GoTo())
+	router.HandleFunc("DELETE /link/{id}/{id2}", handler.Delete())
+	router.HandleFunc("GET /{hash}", handler.GoTo())
 }
 
 func (handler *LinkHandler) Create() http.HandlerFunc {
@@ -32,7 +33,8 @@ func (handler *LinkHandler) Update() http.HandlerFunc {
 
 func (handler *LinkHandler) Delete() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
+		id := r.PathValue("id")
+		fmt.Println(id)
 	}
 }
 
