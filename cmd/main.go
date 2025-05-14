@@ -30,6 +30,6 @@ func main() {
 		Handler: router,
 	}
 
-	fmt.Println("OK, Server is listening on port 8081")
+	fmt.Println("OK, Super! Server is listening on port 8081")
 	server.ListenAndServe()
 }
