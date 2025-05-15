@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Что такое JWT
 type LinkHandlerDeps struct {
 	LinkRepository *LinkRepository
 }
