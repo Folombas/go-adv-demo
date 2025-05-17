@@ -25,7 +25,7 @@ func main() {
 
 	// Handler
 	auth.NewAuthHelloHandler(router, auth.AuthHandlerDeps{
-		Config: conf,
+		Config:      conf,
 		AuthService: authService,
 	})
 	link.NewLinkHandler(router, link.LinkHandlerDeps{
@@ -34,15 +34,15 @@ func main() {
 
 	// Middlewares
 	stack := middleware.Chain(
-		middleware.CORS, 
+		middleware.CORS,
 		middleware.Logging,
 	)
 
-	server := http.Server {
-		Addr: ":8081",
+	server := http.Server{
+		Addr:    ":8081",
 		Handler: stack(router),
 	}
 
-	fmt.Println("OK, Super! Server is listening on port 8081")
+	fmt.Println("OK, Cool! Server is listening on port 8081")
 	server.ListenAndServe()
 }
