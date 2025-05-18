@@ -22,11 +22,11 @@ func writeUnauthed(w http.ResponseWriter) {
 func IsAuthed(next http.Handler, config *configs.Config) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		authedHeader := r.Header.Get("Authorization")
-		if !strings.HasPrefix(authedHeader, "Bearer") {
+		if !strings.HasPrefix(authedHeader, "Bearer ") {
 			writeUnauthed(w)
 			return
 		}
-		token := strings.TrimPrefix(authedHeader, "Bearer")
+		token := strings.TrimPrefix(authedHeader, "Bearer ")
 		isValid, data := jwt.NewJWT(config.Auth.Secret).Parse(token)
 		if !isValid {
 			writeUnauthed(w)
