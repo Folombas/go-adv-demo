@@ -6,5 +6,11 @@ type LinkCreateRequest struct {
 
 type LinkUpdateRequest struct {
 	Url string `json:"url" validate:"required,url"`
-	Hash string `json:"hash"`
+	Hash string `json:"hash,omitempty"`
+}
+
+type GetAllLinksResponse struct {
+	Links []Link `json:"links"`
+	Count int64  `json:"count"`
+
 }

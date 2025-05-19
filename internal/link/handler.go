@@ -121,9 +121,20 @@ func (handler *LinkHandler) GoTo() http.HandlerFunc {
 func (handler *LinkHandler) GetAll() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		limit, err := strconv.Atoi(r.URL.Query().Get("limit"))
-		if err != nill {
+		if err != nil {
 			http.Error(w, "Invalid limit", http.StatusBadRequest)
 			return
 		}
+		offset, err := strconv.Atoi(r.URL.Query().Get("limit"))
+		if err != nil {
+			http.Error(w, "Invalid limit", http.StatusBadRequest)
+			return
+		}
+		links := handler.LinkRepository.GetAll(limit, offset)
+		count := handler.LinkRepository.Count()
+		res.Json(w, GetAllLinksResponse{
+			Links: links,
+			Count: count,
+		}, 200)
 	}
 }
