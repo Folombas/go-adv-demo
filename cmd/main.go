@@ -47,6 +47,6 @@ func main() {
 		Handler: stack(router),
 	}
 
-	fmt.Println("OK, Mega Super! Server is listening on port 8081")
+	fmt.Println("OK, Mega Super Cool! Server is listening on port 8081")
 	server.ListenAndServe()
 }
