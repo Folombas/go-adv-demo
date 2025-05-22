@@ -27,7 +27,7 @@ func main() {
 	// Services
 	authService := auth.NewAuthService(userRepository)
 	statService := stat.NewStatService(&stat.StatServiceDeps{
-		EventBus: eventBus,
+		EventBus:       eventBus,
 		StatRepository: statRepository,
 	})
 
@@ -40,6 +40,10 @@ func main() {
 		LinkRepository: linkRepository,
 		Config:         conf,
 		EventBus:       eventBus,
+	})
+	stat.NewStatHandler(router, stat.StatHandlerDeps{
+		StatRepository: statRepository,
+		Config:         conf,
 	})
 
 	// Middlewares
