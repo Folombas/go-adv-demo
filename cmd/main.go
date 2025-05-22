@@ -5,7 +5,6 @@ import (
 	"go/adv-demo/configs"
 	"go/adv-demo/internal/auth"
 	"go/adv-demo/internal/link"
-	"go/adv-demo/internal/stat"
 	"go/adv-demo/internal/user"
 	"go/adv-demo/pkg/db"
 	"go/adv-demo/pkg/event"
@@ -49,6 +48,6 @@ func main() {
 		Handler: stack(router),
 	}
 
-	fmt.Println("OK, Mega Super Cool! Server is listening on port 8081")
+	fmt.Println("OK, Super Cool! Server is listening on port 8081")
 	server.ListenAndServe()
 }
