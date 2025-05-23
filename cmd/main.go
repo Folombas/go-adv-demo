@@ -59,6 +59,6 @@ func main() {
 
 	go statService.AddClick()
 
-	fmt.Println("OK, Super Cool! Server is listening on port 8081")
+	fmt.Println("OK, Very Nice! Server is listening on port 8081")
 	server.ListenAndServe()
 }
