@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"gorm.io/datatypes"
+	"gorm.io/gorm"
 )
 
 type StatRepository struct {
@@ -33,7 +34,7 @@ func (repo *StatRepository) AddClick(linkId uint) {
 	}
 }
 
-func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatResponse{
+func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatResponse {
 	var stats []GetStatResponse
 	var selectQuery string
 	switch by {
@@ -47,12 +48,11 @@ func (repo *StatRepository) GetStats(by string, from, to time.Time) []GetStatRes
 		Session(&gorm.Session{})
 	if true {
 		query.Where("count > 10")
-	}	
+	}
 
-	
 	query.Where("date BETWEEN ? AND ?", from, to).
 		Group("period").
 		Order("period").
 		Scan(&stats)
-	return stats	
+	return stats
 }
