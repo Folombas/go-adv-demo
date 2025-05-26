@@ -30,10 +30,16 @@ func initDb() *gorm.DB {
 
 func initData(db *gorm.DB) {
 	db.Create(&user.User{
-		Email: "a2@A.ru",
+		Email:    "a2@A.ru",
 		Password: "$2a$10$IlIq2AjCsbzcSMlc1p.ZEOJyYih9mWRtuhhsSifbu.DFJtrkorg0O",
-		Name: "Вася",
+		Name:     "Вася",
 	})
+}
+
+func removeData(db *gorm.DB) {
+	db.Unscoped().
+		Where("email = ?", "a2@a.ru").
+		Delete(&user.User{})
 }
 func TestLoginSuccess(t *testing.T) {
 	// Prepare
@@ -67,9 +73,12 @@ func TestLoginSuccess(t *testing.T) {
 	if resData.Token == "" {
 		t.Fatalf("Token empty")
 	}
+	removeData(db)
 }
 
 func TestLoginFail(t *testing.T) {
+	db := initDb()
+	initData(db)
 	ts := httptest.NewServer(App())
 	defer ts.Close()
 
@@ -85,4 +94,5 @@ func TestLoginFail(t *testing.T) {
 	if res.StatusCode != 401 {
 		t.Fatalf("Expected %d got %d", 401, res.StatusCode)
 	}
+	removeData(db)
 }
