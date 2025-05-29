@@ -62,6 +62,6 @@ func main() {
 		Addr:    ":8081",
 		Handler: app,
 	}
-	fmt.Println("OK, Very Good Nice! Server is listening on port 8081")
+	fmt.Println("OK, Very Good Super! Server is listening on port 8081")
 	server.ListenAndServe()
 }
