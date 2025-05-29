@@ -30,7 +30,7 @@ func bootstrap() (*auth.AuthHandler, sqlmock.Sqlmock, error) {
 	userRepo := user.NewUserRepository(&db.Db{
 		DB: gormDb,
 	})
-	handler := auth.AuthHandler {
+	handler := auth.AuthHandler{
 		Config: &configs.Config{
 			Auth: configs.AuthConfig{
 				Secret: "secret",
@@ -45,7 +45,7 @@ func TestLoginSuccess(t *testing.T) {
 	handler, mock, err := bootstrap()
 	rows := sqlmock.NewRows([]string{"email", "password"}).
 		AddRow("as2@fo.ru", "$2a$10$IlIq2AjCsbzcSMlc1p.ZEOJyYih9mWRtuhhsSifbu.DFJtrkorg0O")
-	mock.ExpectQuery("SELECT").WillReturnRows(rows)	
+	mock.ExpectQuery("SELECT").WillReturnRows(rows)
 	if err != nil {
 		t.Fatal(err)
 		return
